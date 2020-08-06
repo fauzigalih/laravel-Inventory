@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ProductInController extends Controller
 {
+    const NAME_PAGE = "Product In";
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class ProductInController extends Controller
      */
     public function index()
     {
-        //
+        $model = ProductIn::all();
+        $namePage = self::NAME_PAGE;
+        return view('product-in.index', compact('model', 'namePage'));
     }
 
     /**
