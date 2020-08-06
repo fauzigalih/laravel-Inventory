@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title', 'Forms')
-@section('body')
+@section('content')
 <div class="row gap-20 masonry pos-r">
     <div class="masonry-sizer col-md-6"></div>
     <div class="masonry-item col-md-6">

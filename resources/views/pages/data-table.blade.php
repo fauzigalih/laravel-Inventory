@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title', 'Data Table')
-@section('body')
+@section('content')
 <div class="container-fluid">
     <h4 class="c-grey-900 mT-10 mB-30">Data Tables</h4>
     <div class="row">
