@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $model = Product::all();
+        $model = Product::all()->sortBy('invoice');
         $namePage = self::NAME_PAGE;
         return view('product.index', compact('model', 'namePage'));
     }
@@ -39,7 +39,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+        return redirect('product');
     }
 
     /**
