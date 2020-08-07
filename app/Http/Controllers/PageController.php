@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Product;
+use App\ProductIn;
+use App\ProductOut;
+use App\Transaction;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function index(){
-        $model = Product::all();
-        return view('pages.index', compact('model'));
+        $product = Product::count();
+        $productIn = ProductIn::count();
+        $productOut = ProductOut::count();
+        $transaction = Transaction::count();
+        return view('pages.index', compact('product', 'productIn', 'productOut', 'transaction'));
     }
 
     public function signin(){
