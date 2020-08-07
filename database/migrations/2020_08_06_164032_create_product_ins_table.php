@@ -16,9 +16,9 @@ class CreateProductInsTable extends Migration
         Schema::create('product_ins', function (Blueprint $table) {
             $table->id();
             $table->string('invoice', 50);
-            $table->integer('userId');
-            $table->integer('productId');
-            $table->integer('qtyIn');
+            $table->integer('user_id');
+            $table->integer('product_id');
+            $table->integer('qty_in');
             $table->timestamps();
         });
     }
