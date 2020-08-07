@@ -7,6 +7,7 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
     {!! HTML::style('css/custom.css') !!}
     {!! HTML::style('css/style.css') !!}
+    {!! HTML::script('https://kit.fontawesome.com/4176fb7d63.js') !!}
 </head>
 <body class="app">
     <div id="loader">
