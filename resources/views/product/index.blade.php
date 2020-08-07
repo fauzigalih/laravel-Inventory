@@ -1,3 +1,4 @@
+@include('components.main')
 @extends('layout.main')
 
 @section('title', $namePage)
@@ -7,7 +8,7 @@
         <div class="col-md-12">
             <div class="bgc-white bd bdrs-3 p-20 mB-20">
                 <h4 class="c-grey-900 mB-20">{{ $namePage }}</h4>
-                {!! HTML::link('/product/create', 'Create', ['class' => 'btn btn-primary']) !!}
+                {!! HTML::linkIcon('/product/create', 'Create', 'fas fa-plus') !!}
                 <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -30,15 +31,15 @@
                             <tr>
                                 <td>{{ $loop->iteration ?? '' }}</td>
                                 <td>{{ $data->invoice ?? ''}}</td>
-                                <td>{{ $data->nameProduct }}</td>
-                                <td>{{ $data->typeProduct }}</td>
+                                <td>{{ $data->name_product }}</td>
+                                <td>{{ $data->type_product }}</td>
                                 <td>{{ $data->unit }}</td>
                                 <td>{{ $data->price }}</td>
-                                <td>{{ $data->stockFirst }}</td>
-                                <td>{{ $data->stockIn }}</td>
-                                <td>{{ $data->stockOut }}</td>
-                                <td>{{ $data->stockFinal }}</td>
-                                <td>{{ $data->imageProduct }}</td>
+                                <td>{{ $data->stock_first }}</td>
+                                <td>{{ $data->stock_in }}</td>
+                                <td>{{ $data->stock_out }}</td>
+                                <td>{{ $data->stock_final }}</td>
+                                <td>{{ $data->image_product }}</td>
                                 <td>{{ $data->active }}</td>
                             </tr>
                         @endforeach
