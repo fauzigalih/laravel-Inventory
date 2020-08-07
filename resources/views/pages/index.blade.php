@@ -15,7 +15,7 @@
                         <div class="peers ai-sb fxw-nw">
                             <div class="peer peer-greed"><span id="sparklinedash"></span></div>
                             <div class="peer">
-                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-orange-50 c-orange-500">+10%</span>
+                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-orange-50 c-orange-500">{!! $product !!}</span>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="peers ai-sb fxw-nw">
                             <div class="peer peer-greed"><span id="sparklinedash2"></span></div>
                             <div class="peer">
-                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">-7%</span>
+                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">{!! $productIn !!}</span>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="peers ai-sb fxw-nw">
                             <div class="peer peer-greed"><span id="sparklinedash3"></span></div>
                             <div class="peer">
-                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-red-50 c-red-500">~12%</span>
+                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-red-50 c-red-500">{!! $productOut !!}</span>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="peers ai-sb fxw-nw">
                             <div class="peer peer-greed"><span id="sparklinedash4"></span></div>
                             <div class="peer">
-                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-purple-50 c-purple-500">33%</span>
+                                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-purple-50 c-purple-500">{!! $transaction !!}</span>
                             </div>
                         </div>
                     </div>
