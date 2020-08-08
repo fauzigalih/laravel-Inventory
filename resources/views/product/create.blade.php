@@ -11,31 +11,12 @@
             <div class="mT-30">
                 {!! Form::open(['url' => 'product']) !!}
                     <div class="form-row">
-                        <div class="form-group col-md-4">
-
-                            {!! Form::select('size', ['L' => 'Large', 'S' => 'Small'], null, ['class' => 'form-control', 'placeholder' => 'Pick a size...']) !!}
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-    
-                                {!! Form::select('animal',[
-                                    'Cats' => ['leopard' => 'Leopard'],
-                                    'Dogs' => ['spaniel' => 'Spaniel'],
-                            ], null, ['class' => 'form-control', 'placeholder' => 'Pick a size...']) !!}
-                            </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
-                          </div>
                         {!! Form::textGroup('invoice', null, ['autofocus' => true]) !!}
                         {!! Form::textGroup('name_product') !!}
                         {!! Form::textGroup('type_product') !!}
                     </div>
                     <div class="form-row">
-                        {!! Form::textGroup('unit') !!}
+                        {!! Form::selectGroup('unit', array('Pcs', 'Carton/Dus')) !!}
                         {!! Form::numberGroup('price') !!}
                         {!! Form::numberGroup('stock_first') !!}
                     </div>
@@ -46,7 +27,7 @@
                     </div>
                     <div class="form-row">
                         {!! Form::fileGroup('image_product') !!}
-                        {!! Form::numberGroup('active') !!}
+                        {!! Form::selectGroup('active', [1 => 'Active', 0 => 'Not Active']) !!}
                     </div>
                     {!! HTML::buttonIcon('Save', 'fas fa-plus') !!}
                     {!! HTML::linkIcon(url()->previous(), 'Back', 'fas fa-arrow-left', ['class' => 'btn btn-danger']) !!}
