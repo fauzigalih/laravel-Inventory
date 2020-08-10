@@ -28,7 +28,8 @@ class ProductController extends Controller
     public function create()
     {
         $namePage = "Create " . self::NAME_PAGE;
-        return view('product.create', compact('namePage'));
+        $model = Product::all();
+        return view('product.create', compact('namePage', 'model'));
     }
 
     /**
@@ -40,7 +41,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'invoice' => 'required',
+            'invoice' => 'required|size:6|unique:App\Product,invoice|string',
+            'name_product' => 'required|string',
+            'type_product' => 'required|string',
+            'unit' => 'required|string',
+            'price' => 'required|integer',
+            'stock_first' => 'required|integer',
+            'stock_in' => 'required|integer',
+            'stock_out' => 'required|integer',
+            'stock_final' => 'required|integer',
+            'image_product' => 'required',
+            'active' => 'required|integer',
         ]);
 
         Product::create($request->all());
