@@ -1,17 +1,21 @@
+@php
+    $invalid = ($errors->get($name) ? 'form-control is-invalid' : 'form-control');
+    //$old = $value ? old($name) : null;
+@endphp
 <div class="form-group col-md-4">
     {{ Form::label($name, null, ['class' => 'control-label']) }}
     {{ Form::text($name, $value, 
         array_merge(
             [
-                "class" => "form-control" . "@error('invoice') is-invalid @enderror", 
+                'class' => $invalid,
                 'placeholder' => ucwords(str_replace('_', ' ', $name)),
                 'id' => $name,
-            ], 
+            ],
             $attributes,
-        )) }}
-    @error($name)
+            )) }}
+    @foreach ($errors->get($name) as $message)
         <div class="invalid-feedback">
             {{ $message }}
         </div>
-    @enderror
+    @endforeach
 </div>
