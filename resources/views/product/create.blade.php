@@ -10,19 +10,10 @@
             <h4 class="c-grey-900">{{ $namePage }}</h4>
             <div class="mT-30">
                 
-                {!! Form::open(['url' => 'product', 'autocomplete' => false]) !!}
-                @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                {!! Form::open(['url' => 'product', 'autocomplete' => 'off']) !!}
                     <div class="form-row">
-                        {!! Form::textGroup('invoice', null, ['autofocus' => true]) !!}
-                        {!! Form::textGroup('name_product') !!}
+                        {!! Form::textGroup('invoice', $model->invoiceData(), ['readonly' => false]) !!}
+                        {!! Form::textGroup('name_product', null, ['autofocus' => true]) !!}
                         {!! Form::textGroup('type_product') !!}
                     </div>
                     <div class="form-row">
