@@ -19,4 +19,14 @@ class Product extends Model
         'image_product',
         'active'
     ];
+
+    public function invoiceData() {
+        $query = self::max('invoice');
+        $noInvoice = (int) substr($query, 3, 3);
+        $noInvoice++;
+        $charInvoice = "INV";
+        $newInvoice = $charInvoice . sprintf("%03s", $noInvoice);
+
+        return $newInvoice;
+    }
 }
