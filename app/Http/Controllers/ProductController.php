@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function create()
     {
         $namePage = "Create " . self::NAME_PAGE;
-        $model = Product::all();
+        $model = new Product();
         return view('product.create', compact('namePage', 'model'));
     }
 
@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'invoice' => 'required|size:6|unique:App\Product,invoice|string',
+            'invoice' => 'required|size:6|unique:products,invoice|string',
             'name_product' => 'required|string',
             'type_product' => 'required|string',
             'unit' => 'required|string',
