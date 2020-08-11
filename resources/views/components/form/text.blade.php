@@ -1,6 +1,5 @@
 @php
     $invalid = ($errors->get($name) ? 'form-control is-invalid' : 'form-control');
-    //$old = $value ? old($name) : null;
 @endphp
 <div class="form-group col-md-4">
     {{ Form::label($name, null, ['class' => 'control-label']) }}
@@ -9,13 +8,12 @@
             [
                 'class' => $invalid,
                 'placeholder' => ucwords(str_replace('_', ' ', $name)),
-                'id' => $name,
             ],
             $attributes,
             )) }}
-    @foreach ($errors->get($name) as $message)
+    @error ($name)
         <div class="invalid-feedback">
             {{ $message }}
         </div>
-    @endforeach
+    @enderror
 </div>
