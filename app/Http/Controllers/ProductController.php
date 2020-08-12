@@ -55,7 +55,7 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
-        return redirect('product');
+        return redirect('product')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     /**
@@ -66,7 +66,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $namePage = "View " . self::NAME_PAGE;
+        $model = Product::findOrFail($id);
+        return view('product.view', compact('namePage', 'model'));
     }
 
     /**
@@ -77,7 +79,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $namePage = "Update " . self::NAME_PAGE;
+        $model = Product::findOrFail($id);
+        return view('product.update', compact('namePage', 'model'));
     }
 
     /**
@@ -100,6 +104,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect('product')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
