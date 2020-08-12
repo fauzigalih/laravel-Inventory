@@ -49,3 +49,15 @@
         opacity: 0
     }
 }
+
+.fa-eye {
+    color: #4CAF51;
+}
+
+.fa-edit {
+    color: #F3A502;
+}
+
+.fa-trash-alt {
+    color: #ED4236;
+}
