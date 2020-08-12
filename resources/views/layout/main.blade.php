@@ -50,7 +50,7 @@
                     <li class="nav-item"><a class="sidebar-link" href="{{ url('product') }}"><span class="icon-holder"><i class="c-orange-500 ti-package"></i> </span><span class="title">Product</span></a></li>
                     <li class="nav-item"><a class="sidebar-link" href="{{ url('product-in') }}"><span class="icon-holder"><i class="c-green-500 ti-import"></i> </span><span class="title">Product In</span></a></li>
                     <li class="nav-item"><a class="sidebar-link" href="{{ url('product-out') }}"><span class="icon-holder"><i class="c-red-500 ti-export"></i> </span><span class="title">Product Out</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('Transaction') }}"><span class="icon-holder"><i class="c-purple-500 ti-exchange-vertical"></i> </span><span class="title">Transaction</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('transaction') }}"><span class="icon-holder"><i class="c-purple-500 ti-exchange-vertical"></i> </span><span class="title">Transaction</span></a></li>
                 </ul>
             </div>
         </div>
