@@ -7,8 +7,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="bgc-white bd bdrs-3 p-20 mB-20">
+                @include('layout.alert')
                 <h4 class="c-grey-900 mB-20">{{ $namePage }}</h4>
-                {!! HTML::linkIcon('/product/create', 'Create', 'fas fa-plus') !!}
+                {!! HTML::linkIcon('/product/create', 'Create', 'fas fa-plus', ['class' => 'btn btn-primary']) !!}
                 <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -24,6 +25,7 @@
                             <th>Stock Final</th>
                             <th>Image</th>
                             <th>Active</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +43,20 @@
                                 <td>{{ $data->stock_final }}</td>
                                 <td>{{ $data->image_product }}</td>
                                 <td>{{ $data->active }}</td>
+                                <td>
+                                    {!! Form::open(['url' => 'product/'.$data->id]) !!}
+                                        @method('GET')
+                                        {!! HTML::buttonIcon(null, 'far fa-eye', ['class' => 'btn btn-link']) !!}
+                                    {!! Form::close() !!}
+                                    {!! Form::open(['url' => 'product/update/'.$data->id]) !!}
+                                        @method('GET')
+                                        {!! HTML::buttonIcon(null, 'far fa-edit', ['class' => 'btn btn-link']) !!}
+                                    {!! Form::close() !!}
+                                    {!! Form::open(['url' => 'product/'.$data->id]) !!}
+                                        @method('DELETE')
+                                        {!! HTML::buttonIcon(null, 'far fa-trash-alt', ['class' => 'btn btn-link']) !!}
+                                    {!! Form::close() !!}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
