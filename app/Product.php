@@ -20,6 +20,12 @@ class Product extends Model
         'active'
     ];
 
+    public static $unitCategories = [
+        'Unit' => 'Unit',
+        'Pcs' => 'Pcs',
+        'Dus' => 'Dus',
+    ];
+
     public function invoiceData() {
         $query = self::max('invoice');
         $noInvoice = (int) substr($query, 3, 3);
