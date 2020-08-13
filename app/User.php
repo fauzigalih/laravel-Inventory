@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static $activeCategories = [
+        1 => 'Active',
+        0 => 'Not Active'
+    ];
 }
