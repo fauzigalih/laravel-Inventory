@@ -93,7 +93,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $invoice = $product->invoice;
+        Product::updateOrCreate(compact('id', 'invoice'), $request->all());
+        return redirect('product')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
