@@ -46,11 +46,11 @@
                     </div>
                 </div>
                 <ul class="sidebar-menu scrollable pos-r">
-                    <li class="nav-item mT-30 actived"><a class="sidebar-link" href="{{ url('/') }}"><span class="icon-holder"><i class="c-light-blue-500 ti-home"></i> </span><span class="title">Dashboard</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product') }}"><span class="icon-holder"><i class="c-orange-500 ti-package"></i> </span><span class="title">Product</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-in') }}"><span class="icon-holder"><i class="c-green-500 ti-import"></i> </span><span class="title">Product In</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-out') }}"><span class="icon-holder"><i class="c-red-500 ti-export"></i> </span><span class="title">Product Out</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('transaction') }}"><span class="icon-holder"><i class="c-purple-500 ti-exchange-vertical"></i> </span><span class="title">Transaction</span></a></li>
+                    <li class="nav-item mT-30 actived"><a class="sidebar-link" href="{{ url('/') }}"><span class="icon-holder"><i class="c-light-blue-500 fas fa-home"></i> </span><span class="title">Dashboard</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product') }}"><span class="icon-holder"><i class="c-orange-500 fas fa-box-open"></i> </span><span class="title">Product</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-in') }}"><span class="icon-holder"><i class="c-green-500 fas fa-download"></i> </span><span class="title">Product In</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-out') }}"><span class="icon-holder"><i class="c-red-500 fas fa-upload"></i> </span><span class="title">Product Out</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('transaction') }}"><span class="icon-holder"><i class="c-purple-500 fas fa-chart-line"></i> </span><span class="title">Transaction</span></a></li>
                 </ul>
             </div>
         </div>
@@ -58,8 +58,8 @@
             <div class="header navbar">
                 <div class="header-container">
                     <ul class="nav-left">
-                        <li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><i class="ti-menu"></i></a></li>
-                        <li class="search-box"><a class="search-toggle no-pdd-right" href="javascript:void(0);"><i class="search-icon ti-search pdd-right-10"></i> <i class="search-icon-close ti-close pdd-right-10"></i></a></li>
+                        <li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><i class="fas fa-bars"></i></a></li>
+                        <li class="search-box"><a class="search-toggle no-pdd-right" href="javascript:void(0);"><i class="search-icon fas fa-search pdd-right-10"></i> <i class="search-icon-close fas fa-times pdd-right-10"></i></a></li>
                         <li class="search-input"><input class="form-control" type="text" placeholder="Search..."></li>
                     </ul>
                     <ul class="nav-right">
