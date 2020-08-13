@@ -50,14 +50,21 @@
     }
 }
 
-.fa-eye {
+.far.fa-eye {
     color: #4CAF51;
 }
 
-.fa-edit {
+.far.fa-edit {
     color: #F3A502;
 }
 
-.fa-trash-alt {
+.far.fa-trash-alt {
     color: #ED4236;
+}
+
+.btn.btn-link {
+    background: none!important;
+    border: none;
+    padding: 0 2px;
+    display: inline-block;
 }
