@@ -31,8 +31,8 @@
                     <tbody>
                         @foreach ($model as $data)
                             <tr>
-                                <td>{{ $loop->iteration ?? '' }}</td>
-                                <td>{{ $data->invoice ?? ''}}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->invoice }}</td>
                                 <td>{{ $data->name_product }}</td>
                                 <td>{{ $data->type_product }}</td>
                                 <td>{{ $data->unit }}</td>
@@ -42,21 +42,8 @@
                                 <td>{{ $data->stock_out }}</td>
                                 <td>{{ $data->stock_final }}</td>
                                 <td>{{ $data->image_product }}</td>
-                                <td>{{ $data->active }}</td>
-                                <td>
-                                    {!! Form::open(['url' => 'product/'.$data->id]) !!}
-                                        @method('GET')
-                                        {!! HTML::buttonIcon(null, 'far fa-eye', ['class' => 'btn btn-link']) !!}
-                                    {!! Form::close() !!}
-                                    {!! Form::open(['url' => 'product/update/'.$data->id]) !!}
-                                        @method('GET')
-                                        {!! HTML::buttonIcon(null, 'far fa-edit', ['class' => 'btn btn-link']) !!}
-                                    {!! Form::close() !!}
-                                    {!! Form::open(['url' => 'product/'.$data->id]) !!}
-                                        @method('DELETE')
-                                        {!! HTML::buttonIcon(null, 'far fa-trash-alt', ['class' => 'btn btn-link']) !!}
-                                    {!! Form::close() !!}
-                                </td>
+                                <td>{{ $data->active === 1 ? 'Active' : 'Not Active' }}</td>
+                                <td>{!! HTML::actionButton('product', $data) !!}</td>
                             </tr>
                         @endforeach
                     </tbody>
