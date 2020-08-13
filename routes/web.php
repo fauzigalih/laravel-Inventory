@@ -24,8 +24,8 @@ Route::get('/signup', 'PageController@signup');
 // Route::put('product/{product}', 'ProductController@update');
 // Route::delete('product/{product}', 'ProductController@destroy');
 
-Route::resource('product', 'ProductController')->except(['update']);
-Route::get('/product/update/{product}', 'ProductController@edit');
+Route::resource('product', 'ProductController');
+// Route::get('/product/update/{product}', 'ProductController@edit');
 
 Route::get('/product-in', 'ProductInController@index');
 
