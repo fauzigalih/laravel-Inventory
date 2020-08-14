@@ -3,11 +3,10 @@
 @endphp
 <div class="form-group col-md-4">
     {{ Form::label($name, null, ['class' => 'control-label']) }}
-    {{ Form::file($name, $value,
+    {{ Form::file($name,
         array_merge(
             [
                 'class' => $invalid, 
-                'placeholder' => ucwords(str_replace('_', ' ', $name)),
                 'id' => $name,
             ], 
             $attributes,
