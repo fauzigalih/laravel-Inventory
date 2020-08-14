@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock_in');
             $table->integer('stock_out');
             $table->integer('stock_final');
-            $table->string('image_product');
+            $table->string('image_product')->nullable();
             $table->boolean('active');
             $table->timestamps();
         });
