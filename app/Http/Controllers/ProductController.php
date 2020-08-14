@@ -93,9 +93,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'invoice' => 'required|size:6|string',
+            'name_product' => 'required|string',
+            'type_product' => 'required|string',
+            'unit' => 'required|string',
+            'price' => 'required|integer',
+            'stock_first' => 'required|integer',
+            'stock_in' => 'required|integer',
+            'stock_out' => 'required|integer',
+            'stock_final' => 'required|integer',
+            'active' => 'required|integer',
+        ]);
+
         $product = Product::findOrFail($id);
         $invoice = $product->invoice;
-        Product::updateOrCreate(compact('id', 'invoice'), $request->all());
+        $reqImage = $request->image_product;
+        $image = $reqImage == null || $reqImage == ''  ? $product->image_product : $reqImage;
+        Product::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['image_product' => $image]));
         return redirect('product')->with('warning', 'Data Berhasil Diubah!');
     }
 
