@@ -6,6 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    const NAME = 'product';
+    public $namePage;
+
+    public function __construct()
+    {
+        $this->namePage = ucwords(str_replace('_', ' ', Product::NAME));
+    }
+
+    public $index = self::NAME . '.index';
+    public $create = self::NAME . '.create';
+    public $store = self::NAME . '.store';
+    public $show = self::NAME . '.show';
+    public $edit = self::NAME . '.edit';
+    public $update = self::NAME . '.update';
+
     protected $fillable = [
         'invoice',
         'name_product',
