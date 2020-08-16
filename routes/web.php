@@ -24,10 +24,14 @@ Route::get('/signup', 'PageController@signup');
 // Route::put('product/{product}', 'ProductController@update');
 // Route::delete('product/{product}', 'ProductController@destroy');
 
-Route::resource('product', 'ProductController');
+Route::resources([
+    'product' => 'ProductController',
+    'product-in' => 'ProductInController',
+    'product-out' => 'ProductOutController',
+    'transaction' => 'TransactionController'
+]);
 // Route::get('/product/update/{product}', 'ProductController@edit');
 
-Route::get('/product-in', 'ProductInController@index');
 
 Route::get('forms', function () {
     return view('pages.forms');
