@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    const NAME_PAGE = "Product";
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $model = Product::all()->sortBy('invoice');
-        $namePage = self::NAME_PAGE;
-        return view('product.index', compact('model', 'namePage'));
+        $model = new Product();
+        return view('product.index', compact('model'));
     }
 
     /**
@@ -27,9 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $namePage = "Create " . self::NAME_PAGE;
         $model = new Product();
-        return view('product.create', compact('namePage', 'model'));
+        return view('product.create', compact('model'));
     }
 
     /**
@@ -66,9 +63,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $namePage = "View " . self::NAME_PAGE;
         $model = Product::findOrFail($id);
-        return view('product.view', compact('namePage', 'model'));
+        return view('product.view', compact('model'));
     }
 
     /**
@@ -79,9 +75,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $namePage = "Update " . self::NAME_PAGE;
         $model = Product::findOrFail($id);
-        return view('product.update', compact('namePage', 'model'));
+        return view('product.update', compact('model'));
     }
 
     /**
