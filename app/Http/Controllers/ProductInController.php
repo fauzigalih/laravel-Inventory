@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ProductInController extends Controller
 {
-    const NAME_PAGE = "Product In";
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +14,8 @@ class ProductInController extends Controller
      */
     public function index()
     {
-        $model = ProductIn::all();
-        $namePage = self::NAME_PAGE;
-        return view('product-in.index', compact('model', 'namePage'));
+        $model = new ProductIn();
+        return view('product-in.index', compact('model'));
     }
 
     /**
@@ -27,7 +25,8 @@ class ProductInController extends Controller
      */
     public function create()
     {
-        //
+        $model = new ProductIn();
+        return view('product-in.create', compact('model'));
     }
 
     /**
@@ -38,7 +37,8 @@ class ProductInController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ProductIn::create($request->all());
+        return redirect('product-in')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     /**
@@ -49,7 +49,8 @@ class ProductInController extends Controller
      */
     public function show(ProductIn $productIn)
     {
-        //
+        $model = ProductIn::findOrFail($productIn->id);
+        return view('product-in.view', compact('model'));
     }
 
     /**
@@ -60,7 +61,8 @@ class ProductInController extends Controller
      */
     public function edit(ProductIn $productIn)
     {
-        //
+        $model = ProductIn::findOrFail($productIn->id);
+        return view('product-in.update', compact('model'));
     }
 
     /**
@@ -72,7 +74,11 @@ class ProductInController extends Controller
      */
     public function update(Request $request, ProductIn $productIn)
     {
-        //
+        $model = ProductIn::findOrFail($productIn->id);
+        $id = $model->id;
+        $invoice = $model->invoice;
+        ProductIn::updateOrCreate(compact('id', 'invoice'), $request->all());
+        return redirect('product-in')->with('warning', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -83,6 +89,8 @@ class ProductInController extends Controller
      */
     public function destroy(ProductIn $productIn)
     {
-        //
+        $model = ProductIn::findOrFail($productIn->id);
+        ProductIn::destroy($model->id);
+        return redirect('product')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
