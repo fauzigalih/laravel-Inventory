@@ -6,20 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    const NAME = 'product';
-    public $namePage;
-
-    public function __construct()
-    {
-        $this->namePage = ucwords(str_replace('_', ' ', Product::NAME));
-    }
-
-    public $index = self::NAME . '.index';
-    public $create = self::NAME . '.create';
-    public $store = self::NAME . '.store';
-    public $show = self::NAME . '.show';
-    public $edit = self::NAME . '.edit';
-    public $update = self::NAME . '.update';
+    public $namePage = 'Product';
 
     protected $fillable = [
         'invoice',
@@ -49,5 +36,16 @@ class Product extends Model
         $newInvoice = $charInvoice . sprintf("%03s", $noInvoice);
 
         return $newInvoice;
+    }
+
+    public function fileUpload($request, $field){
+        if ($request->hasFile($field)) {
+            $path = $request->file($field);
+            $name = $request->file($field)->getClientOriginalName();
+            $extension = $request->file($field)->extension();
+            $nameFile = time() . '_' . $name . '.' . $extension;
+            return $path->move(public_path('images'), $nameFile);
+        }
+        return false;
     }
 }
