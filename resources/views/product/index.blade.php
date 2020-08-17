@@ -1,15 +1,15 @@
 @include('components.main')
 @extends('layout.main')
 
-@section('title', $namePage)
+@section('title', $model->namePage)
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="bgc-white bd bdrs-3 p-20 mB-20">
                 @include('layout.alert')
-                <h4 class="c-grey-900 mB-20">{{ $namePage }}</h4>
-                {!! HTML::linkIcon('/product/create', 'Create', 'fas fa-plus', ['class' => 'btn btn-primary']) !!}
+                <h4 class="c-grey-900 mB-20">{{ $model->namePage }}</h4>
+                {!! HTML::linkIcon(route('product.create'), 'Create', 'fas fa-plus', ['class' => 'btn btn-primary']) !!}
                 <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($model as $data)
+                        @foreach ($model->all() as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->invoice }}</td>
