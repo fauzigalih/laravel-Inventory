@@ -2,16 +2,12 @@
     use App\Product;
     use App\User;
 
-    $activeInvoice = Route::currentRouteName() === 'product.create' ? $model->invoiceData() : $model->invoice;
     $actionCreate = Route::currentRouteName() === 'product.create';
+    $actionEdit = Route::currentRouteName() === 'product.edit';
     $isDisabled = Route::currentRouteName() === 'product.show';
-    $actionUpdate = Route::currentRouteName() === 'product.edit';
-    $urlForm = Route::currentRouteName() === 'product.edit' ? 'product/'.$model->id : 'product';
+    $activeInvoice = $actionCreate ? $model->invoiceData() : $model->invoice;
 @endphp
-{!! Form::open(['url' => $urlForm, 'autocomplete' => 'off']) !!}
-    @if ($actionUpdate)
-        @method('PUT')
-    @endif
+{!! Form::open(['route' => $actionEdit ? ['product.update', $model->id] : 'product.store', 'method' => $actionEdit ? 'PUT' : 'POST', 'files' => true, 'autocomplete' => 'off']) !!}
     <div class="form-row">
         {!! Form::textGroup('invoice', $activeInvoice, ['readonly' => true]) !!}
         {!! Form::textGroup('name_product', $model->name_product, ['autofocus' => $actionCreate, 'disabled' => $isDisabled]) !!}
