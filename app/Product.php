@@ -37,15 +37,4 @@ class Product extends Model
 
         return $newInvoice;
     }
-
-    public function fileUpload($request, $field){
-        if ($request->hasFile($field)) {
-            $path = $request->file($field);
-            $name = $request->file($field)->getClientOriginalName();
-            $extension = $request->file($field)->extension();
-            $nameFile = time() . '_' . $name . '.' . $extension;
-            return $path->move(public_path('images'), $nameFile);
-        }
-        return false;
-    }
 }
