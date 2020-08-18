@@ -51,7 +51,9 @@ class ProductController extends Controller
             'active' => 'required|integer',
         ]);
 
-        Product::create($request->all());
+        $fileName = date('dmy.His').'_'.$request->invoice.'.'.$request->image_product->extension();
+        $request->image_product->move(public_path('images'), $fileName);
+        Product::create(array_merge($request->all(), ['image_product' => $fileName]));
         return redirect('product')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
@@ -103,9 +105,16 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
         $invoice = $product->invoice;
-        $reqImage = $request->image_product;
-        $image = $reqImage == null || $reqImage == ''  ? $product->image_product : $reqImage;
-        Product::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['image_product' => $image]));
+
+        if ($request->image_product == null || $request->image_product == '') {
+            $fileName = $product->image_product;
+        }else{
+            if (file_exists(public_path('images/'.$product->image_product))) unlink(public_path('images/'.$product->image_product));
+            $fileName = date('dmy.His').'_'.$invoice.'.'.$request->image_product->extension();
+            $request->image_product->move(public_path('images'), $fileName);
+        }
+
+        Product::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['image_product' => $fileName]));
         return redirect('product')->with('warning', 'Data Berhasil Diubah!');
     }
 
@@ -115,9 +124,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::destroy($id);
+        if (file_exists(public_path('images/'.$product->image_product))) unlink(public_path('images/'.$product->image_product));
+        Product::destroy($product->id);
         return redirect('product')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
