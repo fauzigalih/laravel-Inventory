@@ -1,8 +1,10 @@
+@include('components.main')
 <!doctype html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! HTML::favicon('static/images/logo.png') !!}
     <title>@yield('title') - {{ config('app.name') }}</title>
     {!! HTML::style('css/custom.css') !!}
@@ -46,11 +48,11 @@
                     </div>
                 </div>
                 <ul class="sidebar-menu scrollable pos-r">
-                    <li class="nav-item mT-30 actived"><a class="sidebar-link" href="{{ url('/') }}"><span class="icon-holder"><i class="c-light-blue-500 fas fa-home"></i> </span><span class="title">Dashboard</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product') }}"><span class="icon-holder"><i class="c-orange-500 fas fa-box-open"></i> </span><span class="title">Product</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-in') }}"><span class="icon-holder"><i class="c-green-500 fas fa-download"></i> </span><span class="title">Product In</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-out') }}"><span class="icon-holder"><i class="c-red-500 fas fa-upload"></i> </span><span class="title">Product Out</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('transaction') }}"><span class="icon-holder"><i class="c-purple-500 fas fa-chart-line"></i> </span><span class="title">Transaction</span></a></li>
+                    <li class="nav-item mT-30 actived"><a class="sidebar-link" href="{{ url('/') }}"><span class="icon-holder"><i class="c-light-blue-500 fas fa-home"></i> </span><span class="title">{{ __('Dashboard') }}</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product') }}"><span class="icon-holder"><i class="c-orange-500 fas fa-box-open"></i> </span><span class="title">{{ __('Product') }}</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-in') }}"><span class="icon-holder"><i class="c-green-500 fas fa-download"></i> </span><span class="title">{{ __('Product In') }}</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('product-out') }}"><span class="icon-holder"><i class="c-red-500 fas fa-upload"></i> </span><span class="title">{{ __('Product Out') }}</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="{{ url('transaction') }}"><span class="icon-holder"><i class="c-purple-500 fas fa-chart-line"></i> </span><span class="title">{{ __('Transaction') }}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -66,12 +68,20 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                                 <div class="peer mR-10">
-                                    {{ HTML::image('https://randomuser.me/api/portraits/men/10.jpg', '...', ['class' => 'w-2r bdrs-50p']) }}
+                                    {{ HTML::image('static/images/logo.png', '...', ['class' => 'w-2r bdrs-50p']) }}
                                 </div>
-                                <div class="peer"><span class="fsz-sm c-grey-900">John Doe</span></div>
+                                <div class="peer"><span class="fsz-sm c-grey-900">{{ Auth::user()->name }}</span></div>
                             </a>
                             <ul class="dropdown-menu fsz-sm">
-                                <li><a href="{{ url('/') }}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="ti-power-off mR-10"></i> <span>Logout</span></a></li>
+                                <li>
+                                    {!! HTML::linkIcon(route('logout'), 'Logout', 'fas fa-sign-out-alt mR-10', 
+                                        [   
+                                            'class' => 'd-b td-n pY-5 bgcH-grey-100 c-grey-700', 
+                                            'onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();'
+                                        ]) !!}
+                                    {!! Form::open(['route' => 'logout', 'id' => 'logout-form']) !!}
+                                    {!! Form::close() !!}
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -84,7 +94,7 @@
             </main>
             <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
                 <span>
-                    Copyright © 2020 <a href="https://www.instagram.com/fauzigalihajisaputro/">Fauzi Galih</a> and Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>. All rights
+                    Copyright © 2020 <a href="https://www.instagram.com/fauzigalihajisaputro/">{{ __('Fauzi Galih') }}</a> and Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>. All rights
                     reserved.
                 </span>
             </footer>
