@@ -40,3 +40,6 @@ Route::get('forms', function () {
 Route::get('table', function () {
     return view('pages.data-table');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
