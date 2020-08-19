@@ -41,7 +41,7 @@
                                 <td>{{ $data->stock_in }}</td>
                                 <td>{{ $data->stock_out }}</td>
                                 <td>{{ $data->stock_final }}</td>
-                                <td>{{ $data->image_product }}</td>
+                                <td>{{ HTML::image('images/'.$data->image_product, $data->image_product, ['width' => 70 , 'height' => 50]) }}</td>
                                 <td>{{ $data->active === 1 ? 'Active' : 'Not Active' }}</td>
                                 <td>{!! HTML::actionButton('product', $data) !!}</td>
                             </tr>
