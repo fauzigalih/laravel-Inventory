@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -44,16 +49,13 @@ class ProductController extends Controller
             'unit' => 'required|string',
             'price' => 'required|integer',
             'stock_first' => 'required|integer',
-            'stock_in' => 'required|integer',
-            'stock_out' => 'required|integer',
-            'stock_final' => 'required|integer',
             'image_product' => 'required',
             'active' => 'required|integer',
         ]);
 
         $fileName = date('dmy.His').'_'.$request->invoice.'.'.$request->image_product->extension();
         $request->image_product->move(public_path('images'), $fileName);
-        Product::create(array_merge($request->all(), ['image_product' => $fileName]));
+        Product::create(array_merge($request->all(), ['stock_final' => $request->stock_first, 'image_product' => $fileName]));
         return redirect('product')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
@@ -97,14 +99,12 @@ class ProductController extends Controller
             'unit' => 'required|string',
             'price' => 'required|integer',
             'stock_first' => 'required|integer',
-            'stock_in' => 'required|integer',
-            'stock_out' => 'required|integer',
-            'stock_final' => 'required|integer',
             'active' => 'required|integer',
         ]);
 
         $product = Product::findOrFail($id);
         $invoice = $product->invoice;
+        $stock_final = $request->stock_first + $product->stock_in - $product->stock_out;
 
         if ($request->image_product == null || $request->image_product == '') {
             $fileName = $product->image_product;
@@ -114,7 +114,7 @@ class ProductController extends Controller
             $request->image_product->move(public_path('images'), $fileName);
         }
 
-        Product::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['image_product' => $fileName]));
+        Product::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['stock_final' => $stock_final, 'image_product' => $fileName]));
         return redirect('product')->with('warning', 'Data Berhasil Diubah!');
     }
 
