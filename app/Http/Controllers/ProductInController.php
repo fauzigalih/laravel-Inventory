@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\ProductIn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductInController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +44,15 @@ class ProductInController extends Controller
      */
     public function store(Request $request)
     {
-        ProductIn::create($request->all());
+        $request->validate([
+            'invoice' => 'required|size:6|unique:products,invoice|string',
+            'product_id' => 'required|integer',
+            'qty_in' => 'required|integer',
+        ]);
+
+        $product = new Product();
+        $product->updateStock('stock_in', $request->product_id, $request->qty_in);
+        ProductIn::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
         return redirect('product-in')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
@@ -74,6 +89,9 @@ class ProductInController extends Controller
      */
     public function update(Request $request, ProductIn $productIn)
     {
+        $product = new Product();
+        $product->updateStock('stock_in', $request->product_id, $request->qty_in);
+
         $model = ProductIn::findOrFail($productIn->id);
         $id = $model->id;
         $invoice = $model->invoice;
