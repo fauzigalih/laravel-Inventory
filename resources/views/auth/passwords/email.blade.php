@@ -6,7 +6,7 @@
 @section('content')
 <h4 class="fw-300 c-grey-900 mB-40">{{ __('Reset Password') }}</h4>
 @include('layout.alert')
-{!! Form::open(['route' => 'register']) !!}
+{!! Form::open(['route' => 'password.email']) !!}
     <div class="form-group">
         {!! Form::label('email', null, ['class' => 'text-normal text-dark']); !!}
         {!! Form::email('email', old('email'), ['class' => $invalidEmail, 'placeholder' => 'Email', 'autofocus' => true]) !!}
