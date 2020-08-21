@@ -19,11 +19,6 @@
         {!! Form::numberGroup('stock_first', $model->stock_first, ['disabled' => $isDisabled]) !!}
     </div>
     <div class="form-row">
-        {!! Form::numberGroup('stock_in', $model->stock_in, ['disabled' => $isDisabled]) !!}
-        {!! Form::numberGroup('stock_out', $model->stock_out, ['disabled' => $isDisabled]) !!}
-        {!! Form::numberGroup('stock_final', $model->stock_final, ['disabled' => $isDisabled]) !!}
-    </div>
-    <div class="form-row">
         {!! Form::fileGroup('image_product', ['disabled' => $isDisabled]) !!}
         {!! Form::selectGroup('active', User::$activeCategories, $model->active, ['disabled' => $isDisabled]) !!}
     </div>
