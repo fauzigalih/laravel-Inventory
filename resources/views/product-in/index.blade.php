@@ -15,7 +15,7 @@
                         <tr>
                             <th>No</th>
                             <th>Invoice</th>
-                            <th>Username</th>
+                            <th>Created By</th>
                             <th>Product</th>
                             <th>Price</th>
                             <th>Qty In</th>
@@ -28,11 +28,11 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->invoice }}</td>
-                                <td>{{ $data->user_id }}</td>
-                                <td>{{ $data->product_id }}</td>
-                                <td>{{ $data->getProduct->price ?? '' }}</td>
+                                <td>{{ $data->user->name ?? null}}</td>
+                                <td>{{ $data->product->name_product ?? null }}</td>
+                                <td>{{ $data->product->price ?? null }}</td>
                                 <td>{{ $data->qty_in }}</td>
-                                <td>{{ $data->getProduct->image_product ?? '' }}</td>
+                                <td>{{ HTML::image('images/'.($data->product->image_product ?? null), $data->product->image_product ?? null, ['width' => 70 , 'height' => 50]) }}</td>
                                 <td>{!! HTML::actionButton('product-in', $data) !!}</td>
                             </tr>
                         @endforeach
