@@ -1,4 +1,5 @@
 @php
+    use App\Product;
     use App\ProductIn;
     use App\User;
 
@@ -10,8 +11,7 @@
 {!! Form::open(['route' => $actionEdit ? ['product-in.update', $model->id] : 'product-in.store', 'method' => $actionEdit ? 'PUT' : 'POST','autocomplete' => 'off']) !!}
     <div class="form-row">
         {!! Form::textGroup('invoice', $activeInvoice, ['readonly' => true]) !!}
-        {!! Form::textGroup('user_id', $model->product_id, ['autofocus' => $actionCreate, 'disabled' => $isDisabled]) !!}
-        {!! Form::textGroup('product_id', $model->product_id, ['disabled' => $isDisabled]) !!}
+        {!! Form::selectGroup('product_id', Product::listProduct(), $model->product_id, ['autofocus' => true, 'disabled' => $isDisabled]) !!}
         {!! Form::textGroup('qty_in', $model->qty_in, ['disabled' => $isDisabled]) !!}
     </div>
     @if (!$isDisabled)
