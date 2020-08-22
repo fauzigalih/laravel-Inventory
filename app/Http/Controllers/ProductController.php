@@ -42,16 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'invoice' => 'required|size:6|unique:products,invoice|string',
-            'name_product' => 'required|string',
-            'type_product' => 'required|string',
-            'unit' => 'required|string',
-            'price' => 'required|integer',
-            'stock_first' => 'required|integer',
-            'image_product' => 'required',
-            'active' => 'required|integer',
-        ]);
+        Product::validateData($request);
 
         $fileName = date('dmy.His').'_'.$request->invoice.'.'.$request->image_product->extension();
         $request->image_product->move(public_path('images'), $fileName);
@@ -92,15 +83,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'invoice' => 'required|size:6|string',
-            'name_product' => 'required|string',
-            'type_product' => 'required|string',
-            'unit' => 'required|string',
-            'price' => 'required|integer',
-            'stock_first' => 'required|integer',
-            'active' => 'required|integer',
-        ]);
+        Product::validateData($request);
 
         $product = Product::findOrFail($id);
         $invoice = $product->invoice;
@@ -126,7 +109,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if (file_exists(public_path('images/'.$product->image_product))) unlink(public_path('images/'.$product->image_product));
         Product::destroy($product->id);
         return redirect('product')->with('danger', 'Data Berhasil Dihapus!');
     }
