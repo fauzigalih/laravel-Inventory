@@ -44,14 +44,8 @@ class ProductInController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'invoice' => 'required|size:6|unique:products,invoice|string',
-            'product_id' => 'required|integer',
-            'qty_in' => 'required|integer',
-        ]);
-
-        $product = new Product();
-        $product->updateStock('stock_in', $request->product_id, $request->qty_in);
+        ProductIn::validateData($request);
+        Product::updateStock($request->product_id, $request->qty_in);
         ProductIn::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
         return redirect('product-in')->with('success', 'Data Berhasil Ditambahkan!');
     }
@@ -89,13 +83,12 @@ class ProductInController extends Controller
      */
     public function update(Request $request, ProductIn $productIn)
     {
-        $product = new Product();
-        $product->updateStock('stock_in', $request->product_id, $request->qty_in);
-
+        ProductIn::validateData($request);
         $model = ProductIn::findOrFail($productIn->id);
         $id = $model->id;
         $invoice = $model->invoice;
-        ProductIn::updateOrCreate(compact('id', 'invoice'), $request->all());
+        Product::updateStock($model->product_id, $model->qty_in, $request->product_id, $request->qty_in);
+        ProductIn::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['user_id' => Auth::user()->id]));
         return redirect('product-in')->with('warning', 'Data Berhasil Diupdate!');
     }
 
@@ -109,6 +102,6 @@ class ProductInController extends Controller
     {
         $model = ProductIn::findOrFail($productIn->id);
         ProductIn::destroy($model->id);
-        return redirect('product')->with('danger', 'Data Berhasil Dihapus!');
+        return redirect('product-in')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
