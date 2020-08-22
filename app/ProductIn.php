@@ -2,8 +2,9 @@
 
 namespace App;
 
-use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ProductIn extends Model
 {
@@ -15,6 +16,16 @@ class ProductIn extends Model
         'product_id',
         'qty_in'
     ];
+
+    public static function validateData(Request $request)
+    {
+        $update = Route::currentRouteName() === 'product-in.update';
+        $request->validate(array_merge([
+            'invoice' => 'required|size:6|unique:products,invoice|string',
+            'product_id' => 'required|integer',
+            'qty_in' => 'required|integer',
+        ], $update ? ['invoice' => 'required|size:6|string'] : []));
+    }
 
     public function invoiceData() {
         $query = self::max('invoice');
