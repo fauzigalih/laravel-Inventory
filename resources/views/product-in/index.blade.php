@@ -30,7 +30,7 @@
                                 <td>{{ $data->invoice }}</td>
                                 <td>{{ $data->user->name ?? null}}</td>
                                 <td>{{ $data->product->name_product ?? null }}</td>
-                                <td>{{ $data->product->price ?? null }}</td>
+                                <td>{{ number_format($data->product->price, 0, ',', '.') ?? null }}</td>
                                 <td>{{ $data->qty_in }}</td>
                                 <td>{{ HTML::image('images/'.($data->product->image_product ?? null), $data->product->image_product ?? null, ['width' => 70 , 'height' => 50]) }}</td>
                                 <td>{!! HTML::actionButton('product-in', $data) !!}</td>

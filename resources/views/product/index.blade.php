@@ -36,7 +36,7 @@
                                 <td>{{ $data->name_product }}</td>
                                 <td>{{ $data->type_product }}</td>
                                 <td>{{ $data->unit }}</td>
-                                <td>{{ $data->price }}</td>
+                                <td>{{ number_format($data->price, 0, ',', '.') }}</td>
                                 <td>{{ $data->stock_first }}</td>
                                 <td>{{ $data->stock_in }}</td>
                                 <td>{{ $data->stock_out }}</td>
