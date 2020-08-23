@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Transaction extends Model
 {
-    public $namePage = 'Product Out';
+    public $namePage = 'Transaction';
 
     protected $fillable = [
         'invoice',
@@ -29,7 +30,7 @@ class Transaction extends Model
         ]);
     }
 
-    public function invoiceData() {
+    public static function invoiceData() {
         $query = self::max('invoice');
         $noInvoice = (int) substr($query, 3, 3);
         $noInvoice++;
@@ -37,6 +38,20 @@ class Transaction extends Model
         $newInvoice = $charInvoice . sprintf("%03s", $noInvoice);
 
         return $newInvoice;
+    }
+
+    public static function saveTransaction($invoice, $productId, $qtyTrx, $update = false)
+    {
+        $product = Product::findOrFail($productId);
+        return self::updateOrCreate([
+            'code_trx' => $invoice
+        ], array_merge([
+            'code_trx' => $invoice,
+            'user_id' => Auth::user()->id,
+            'stock_first' => $product->stock_first,
+            'qty_trx' => $qtyTrx,
+            'stock_final' => $product->stock_final,
+        ], $update ? [] : ['invoice' => self::invoiceData()]));
     }
 
     public function product()
