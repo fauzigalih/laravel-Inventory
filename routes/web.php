@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TransactionController;
+use App\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'UserController@index');
-Route::get('/transaction', 'TransactionController@index');
+// Route::get('/transaction', 'TransactionController@index');
+// Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
 
 Route::resources([
     'product' => 'ProductController',
     'product-in' => 'ProductInController',
     'product-out' => 'ProductOutController',
+    'transaction' => 'TransactionController'
 ]);
 
 Auth::routes();
