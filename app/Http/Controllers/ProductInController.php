@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\ProductIn;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,7 @@ class ProductInController extends Controller
         ProductIn::validateData($request);
         Product::updateStock($request->product_id, $request->qty_in);
         ProductIn::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
+        Transaction::saveTransaction($request->invoice, $request->product_id, $request->qty_in);
         return redirect('product-in')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
@@ -89,6 +91,7 @@ class ProductInController extends Controller
         $invoice = $model->invoice;
         Product::updateStock($model->product_id, $model->qty_in, $request->product_id, $request->qty_in);
         ProductIn::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['user_id' => Auth::user()->id]));
+        Transaction::saveTransaction($invoice, $request->product_id, $request->qty_in);
         return redirect('product-in')->with('warning', 'Data Berhasil Diupdate!');
     }
 
