@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $model = new Transaction();
+        return view('transaction.index', compact('model'));
     }
 
     /**
@@ -29,7 +25,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        abort(405);
     }
 
     /**
@@ -40,7 +36,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort(405);
     }
 
     /**
@@ -51,7 +47,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        abort(405);
     }
 
     /**
@@ -62,7 +58,7 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        abort(405);
     }
 
     /**
@@ -74,7 +70,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        abort(405);
     }
 
     /**
@@ -85,6 +81,7 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        Transaction::destroy($transaction->id);
+        return redirect('transaction')->with('danger', 'Data Berhsail Dihapus!');
     }
 }

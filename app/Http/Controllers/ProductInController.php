@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductInController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -91,7 +86,7 @@ class ProductInController extends Controller
         $invoice = $model->invoice;
         Product::updateStock($model->product_id, $model->qty_in, $request->product_id, $request->qty_in);
         ProductIn::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['user_id' => Auth::user()->id]));
-        Transaction::saveTransaction($invoice, $request->product_id, $request->qty_in);
+        Transaction::saveTransaction($invoice, $request->product_id, $request->qty_in, true);
         return redirect('product-in')->with('warning', 'Data Berhasil Diupdate!');
     }
 

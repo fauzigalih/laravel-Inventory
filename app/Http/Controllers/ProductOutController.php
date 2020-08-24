@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\ProductOut;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductOutController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +43,7 @@ class ProductOutController extends Controller
         ProductOut::validateData($request);
         Product::updateStock($request->product_id, $request->qty_out);
         ProductOut::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
+        Transaction::saveTransaction($request->invoice, $request->product_id, $request->qty_out);
         return redirect('product-out')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
@@ -71,7 +68,7 @@ class ProductOutController extends Controller
     public function edit(ProductOut $productOut)
     {
         $model = ProductOut::findOrFail($productOut->id);
-        return view('product-out.edit', compact('model'));
+        return view('product-out.update', compact('model'));
     }
 
     /**
@@ -89,6 +86,7 @@ class ProductOutController extends Controller
         $invoice = $model->invoice;
         Product::updateStock($model->product_id, $model->qty_out, $request->product_id, $request->qty_out);
         ProductOut::updateOrCreate(compact('id', 'invoice'), array_merge($request->all(), ['user_id' => Auth::user()->id]));
+        Transaction::saveTransaction($invoice, $request->product_id, $request->qty_out, true);
         return redirect('product-out')->with('warning', 'Data Berhasil Diupdate!');
     }
 
