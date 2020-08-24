@@ -31,14 +31,19 @@
                                 <td>{{ $data->invoice }}</td>
                                 <td>{{ $data->user->name ?? null}}</td>
                                 <td>{{ $data->code_trx }}</td>
-                                <td>{{ $data->product->name_product ?? null }}</td>
+                                <td>{{ $data->productIn->product->name_product ?? $data->productOut->product->name_product ?? null }}</td>
                                 <td>{{ $data->stock_first }}</td>
                                 <td>{{ $data->qty_trx }}</td>
                                 <td>{{ $data->stock_final }}</td>
-                                <td>{{ HTML::image('images/'.($data->product->image_product ?? null), $data->product->image_product ?? null, ['width' => 70 , 'height' => 50]) }}</td>
                                 <td>
-                                    {!! Form::open(['route' => ['transaction.destroy', $data->id], 'method' => 'DELETE']) !!}
-                                    {!! HTML::actionButton('product-in', $data) !!}
+                                    {{ HTML::image('images/'.($data->productIn->product->image_product ?? $data->productOut->product->image_product ?? null), 
+                                        $data->productIn->product->image_product ?? $data->productOut->product->image_product ?? null, 
+                                        ['width' => 70 , 'height' => 50]) }}
+                                </td>
+                                <td>
+                                    {!! Form::open(['route' => ['transaction.destroy', $data->id]]) !!}
+                                        @method('DELETE')
+                                        {!! HTML::buttonIcon(null, 'far fa-trash-alt', ['class' => 'btn btn-link']) !!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>
