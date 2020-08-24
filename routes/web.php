@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'UserController@index');
-// Route::get('/transaction', 'TransactionController@index');
-// Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
-
-Route::resources([
-    'product' => 'ProductController',
-    'product-in' => 'ProductInController',
-    'product-out' => 'ProductOutController',
-    'transaction' => 'TransactionController'
-]);
+  
+Route::middleware(['auth'])->group(function() {
+    Route::get('/', 'UserController@index');
+    Route::resources([
+        'product' => 'ProductController',
+        'product-in' => 'ProductInController',
+        'product-out' => 'ProductOutController',
+        'transaction' => 'TransactionController'
+    ]);
+});
 
 Auth::routes();
