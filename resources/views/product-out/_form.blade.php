@@ -10,7 +10,7 @@
     <div class="form-row">
         {!! Form::textGroup('invoice', $activeInvoice, ['readonly' => true]) !!}
         {!! Form::selectGroup('product_id', Product::listProduct(), $model->product_id, ['autofocus' => true, 'disabled' => $isDisabled]) !!}
-        {!! Form::textGroup('qty_out', $model->qty_in, ['disabled' => $isDisabled]) !!}
+        {!! Form::textGroup('qty_out', $model->qty_out, ['disabled' => $isDisabled]) !!}
     </div>
     @if (!$isDisabled)
         {!! HTML::buttonIcon('Save', 'fas fa-plus') !!}
