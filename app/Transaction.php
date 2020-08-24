@@ -54,9 +54,14 @@ class Transaction extends Model
         ], $update ? [] : ['invoice' => self::invoiceData()]));
     }
 
-    public function product()
+    public function productIn()
     {
-        return $this->hasOne('App\Product', 'id', 'product_id')->withTrashed();
+        return $this->hasOne('App\ProductIn', 'invoice', 'code_trx');
+    }
+    
+    public function productOut()
+    {
+        return $this->hasOne('App\ProductOut', 'invoice', 'code_trx');
     }
 
     public function user()
